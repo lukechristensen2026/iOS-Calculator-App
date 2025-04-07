@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import SwiftUI
+import PlaygroundSupport
+struct ContentView: View
+{
+    @State var num1Text = ""
+    @State var num2Text = ""
+    @State var ansText = ""
+    @State var history: [String] = []
+    @State var lastEquation = ""
+    @State var equations = ""
+    @State var displayedHistory = ""
+    @State var isTrue = true
+    var body: some View {
+        VStack(spacing: 11){
+            Text("Enter Two Numbers and Choose an Operation!")
+                .fontWeight(.bold)
+                .padding()
+                .font(.system(size: 25, weight: .light, design: .serif))
+                .foregroundColor(.orange)
+            Text("\(lastEquation)")
+            TextField("Enter Number", text: $num1Text)
+            TextField("Enter Number", text: $num2Text)
+            TextField("History", text: $lastEquation)
+            HStack(spacing: 11){
+                Button(action:{operation(operand: "add")}){
+                    Image(systemName: "plus.circle")
+                        .foregroundColor(.orange)
+                }
+                Button(action:{operation(operand: "sub")}){
+                    Image(systemName: "minus.circle")
+                        .foregroundColor(.orange)
+                }
+            }
+            HStack(spacing:11){
+                Button(action:{operation(operand: "mul")}){
+                    Image(systemName: "multiply.circle")
+                        .foregroundColor(.orange)
+                }
+                Button(action:{operation(operand: "div")}){
+                    Image(systemName: "divide.circle")
+                        .foregroundColor(.orange)
+                }
+            }
+            HStack(spacing: 11) {
+                Button(action:{operation(operand: "square")}) {
+                    Image(systemName: "multiply.circle.fill")
+                        .foregroundColor(.orange)
+                }
+                Button(action: {operation(operand: "sqrt")}){
+                    Image(systemName: "divide.circle.fill")
+                        .foregroundColor(.orange)
+                }
+            }
+            VStack(spacing:25){
+                Button(action: {historyCheck()}) {
+                    Text("History")
+                        .font(.system(size: 25, weight: .light, design: .serif))
+                        .foregroundColor(.orange)
+                }
+                Button(action: {lastFive()}){
+                    Text("Recent History")
+                        .font(.system(size: 25, weight: .light, design: .serif))
+                        .foregroundColor(.orange)
+                }
+                
+                Button(action: {clearHistory()}){
+                    Text("Clear History")
+                        .font(.system(size: 25, weight: .light, design: .serif))
+                        .foregroundColor(.orange)
+                }
+            }
+        }
+    }
+    
+    
+    func operation(operand: String){
+        let num1: Double = Double(num1Text) ?? 0.0
+        let num2: Double = Double(num2Text) ?? 0.0
+        var operandText = ""
+        if operand == "add"{
+            ansText = "\(num1 + num2)"
+            operandText = " +"
+            lastEquation = "\(num1Text)\(operandText) \(num2Text) = \(ansText)"
+        }
+        if operand == "sub"{
+            ansText = "\(num1 - num2)"
+            operandText = " -"
+            lastEquation = "\(num1Text)\(operandText) \(num2Text) = \(ansText)"
+        }
+        if operand == "mul"{
+            var product = 0.0
+            for _ in 0..&lt;Int(num2)
+            {
+                product += num1
+            }
+            ansText = "\(product)"
+            operandText = " x"
+            lastEquation = "\(num1Text)\(operandText) \(num2Text) = \(ansText)"
+        }
+        if operand == "div"{
+            ansText = "\(num1 / num2)"
+            operandText = " /"
+            lastEquation = "\(num1Text)\(operandText) \(num2Text) = \(ansText)"
+        }
+        if operand == "square"{
+            ansText = "\(num1 * num1)"
+            operandText = "\u{00B2}"
+            lastEquation = "\(num1Text)\(operandText) = \(ansText)"
+        }
+        if operand == "sqrt"{
+            ansText = "\(num1.squareRoot())"
+            operandText = "\u{221A}"
+            lastEquation = "\(operandText)\(num1Text) = \(ansText)"
+        }
+        history.append(lastEquation)
+        print(lastEquation)
+        num1Text = ansText
+        num2Text = ""
+    }
+    
+    func historyCheck(){
+        print("[|~~~~~~~~~~~~~~~~~~~~~~~~~~~|]")
+        for equations in history{
+            let currentEquation = equations
+            print(currentEquation)
+        }
+        print("[|~~~~~~~~~~~~~~~~~~~~~~~~~~~|]")
+    }
+    
+    func lastFive(){
+        while history.count &gt; 5 {
+            history.remove(at: 0)
+        }
+        lastEquation = " "
+        for item in history {
+            lastEquation += item + ", "
+        }
+    }
+    
+    func clearHistory(){
+        history = [""]
+        lastEquation = ""
+    }
+    
+    func randomEquation()
+    {
+        
+    }
+    
+}
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 5034}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>PlaygroundPage.current.setLiveView(ContentView())
+</string>
+			<key>ModifiedRange</key>
+			<string>{5035, 50}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
